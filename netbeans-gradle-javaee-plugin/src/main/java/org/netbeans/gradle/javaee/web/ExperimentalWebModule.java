@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.netbeans.api.project.Project;
+import org.netbeans.gradle.project.NbGradleProject;
 import org.netbeans.modules.j2ee.dd.api.web.WebApp;
 import org.netbeans.modules.j2ee.deployment.devmodules.api.J2eeModule;
 import org.netbeans.modules.j2ee.deployment.devmodules.spi.J2eeModuleImplementation2;
@@ -24,6 +26,16 @@ import org.openide.filesystems.FileUtil;
 public class ExperimentalWebModule implements J2eeModuleImplementation2 {
 
     private static final Logger logger = Logger.getLogger(ExperimentalWebModule.class.getName());
+
+    private final Project project;
+    
+    public ExperimentalWebModule(Project project) {
+        this.project = project;
+    }
+    
+    protected NbGradleProject getGradleProject() {
+        return project.getLookup().lookup(NbGradleProject.class);
+    }
 
     @Override
     public J2eeModule.Type getModuleType() {

@@ -12,6 +12,7 @@ import javax.swing.AbstractAction;
 import javax.swing.Action;
 import org.netbeans.api.io.IOProvider;
 import org.netbeans.api.io.InputOutput;
+import org.netbeans.api.project.Project;
 import org.netbeans.gradle.project.api.nodes.GradleProjectContextActions;
 import org.netbeans.modules.j2ee.deployment.devmodules.api.Deployment;
 import org.openide.util.Exceptions;
@@ -22,12 +23,18 @@ import org.openide.util.Exceptions;
  */
 public class DeploymentActions implements GradleProjectContextActions {
 
+    private final Project project;
+
+    public DeploymentActions(Project project) {
+        this.project = project;
+    }
+
     @Override
     public List<Action> getContextActions() {
         return Arrays.asList((Action) new DeployAction("Deploy"));
     }
 
-    private static class DeployAction extends AbstractAction {
+    private class DeployAction extends AbstractAction {
 
         public DeployAction(String name) {
             super(name);
@@ -39,7 +46,7 @@ public class DeploymentActions implements GradleProjectContextActions {
             Deployment deployer = Deployment.getDefault();
             String siid = deployer.getServerInstanceIDs()[0];
 
-            ExperimentalWebModuleProvider p = new ExperimentalWebModuleProvider();
+            ExperimentalWebModuleProvider p = new ExperimentalWebModuleProvider(project);
             p.setServerInstanceID(siid);
 
             String deploy;

@@ -51,7 +51,7 @@ public class WebModuleExtension implements GradleProjectExtension2<NbWebModel> {
                 new GradleWebModuleProvider(this),
                 new WebCdiUtil(project),
                 new GradleWebProjectSources(this),
-                new DeploymentActions()
+                new DeploymentActions(project)
             );
         }
         return projectLookup;
