@@ -33,9 +33,10 @@ public class ExperimentalWebModule implements J2eeModuleImplementation2 {
         this.project = project;
     }
     
+    /*
     protected NbGradleProject getGradleProject() {
         return project.getLookup().lookup(NbGradleProject.class);
-    }
+    }*/
 
     @Override
     public J2eeModule.Type getModuleType() {
