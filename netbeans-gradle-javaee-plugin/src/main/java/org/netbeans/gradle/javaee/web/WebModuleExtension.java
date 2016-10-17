@@ -50,7 +50,8 @@ public class WebModuleExtension implements GradleProjectExtension2<NbWebModel> {
             projectLookup = Lookups.fixed(
                 new GradleWebModuleProvider(this),
                 new WebCdiUtil(project),
-                new GradleWebProjectSources(this)
+                new GradleWebProjectSources(this),
+                new DeploymentActions()
             );
         }
         return projectLookup;
